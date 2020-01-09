@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "193830523572",
+    "firebase_url": "https://dopplle.firebaseio.com",
+    "project_id": "dopplle",
+    "storage_bucket": "dopplle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193830523572:android:56e5d95eecf08686e9bde1",
+        "android_client_info": {
+          "package_name": "com.dopplle.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193830523572-hfnn2412m3qs6bjk00rdjebkje97d2es.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYl3FtTonsRrkiFZwC5SErMHJLQ3pzato"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193830523572-hfnn2412m3qs6bjk00rdjebkje97d2es.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
