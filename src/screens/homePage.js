@@ -85,8 +85,8 @@ export default class HomePage extends React.Component {
       } else{
         this.setState({loading:true})
 
-            fetch('http://192.168.207.54:7002/Api/reg', {
-            // fetch('http://dopplle.net/Api/reg', {
+            // fetch('http://192.168.207.54:7002/Api/reg', {
+            fetch('http://dopplle.net/Api/reg', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -176,8 +176,8 @@ export default class HomePage extends React.Component {
    * Return parameter: userId
    */
   insertInformation = (userName,email,photourl,firstname="",lastname="") =>{
-    fetch('http://192.168.207.54:7002/Api/reg', {
-    // fetch('http://dopplle.net/Api/reg', {
+    // fetch('http://192.168.207.54:7002/Api/reg', {
+    fetch('http://dopplle.net/Api/reg', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

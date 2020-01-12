@@ -46,8 +46,8 @@ export default class WaistPage extends React.Component {
     // var userId = '34'
     this.setState({userId:userId,loading:true})
 
-            fetch('http://192.168.207.54:7002/Apimeasurement/measurement?measurementId=2', {
-            // fetch('http://dopplle.net/Apimeasurement/measurement?measurementId= 2', {
+            // fetch('http://192.168.207.54:7002/Apimeasurement/measurement?measurementId=2', {
+            fetch('http://dopplle.net/Apimeasurement/measurement?measurementId= 2', {
                 method: 'GET',
                 }).then((response) => response.json())
                 .then(async(responseJson) => {
@@ -78,8 +78,8 @@ export default class WaistPage extends React.Component {
                 .catch((err)=>{
                     console.log("--------------",err)
                 }) 
-                fetch('http://192.168.207.54:7002/Apimeasurement/measurement', {
-                // fetch('http://dopplle.net/Apimeasurement/measurement?', {
+                // fetch('http://192.168.207.54:7002/Apimeasurement/measurement', {
+                fetch('http://dopplle.net/Apimeasurement/measurement?', {
                 
                 method: 'POST',
                 headers: {
@@ -242,8 +242,8 @@ export default class WaistPage extends React.Component {
             measureUintId = 2
         }
 
-        fetch('http://192.168.207.54:7002/Apimeasurement/measurement', {
-            // fetch('http://dopplle.net/Apimeasurement/measurement?', {
+        // fetch('http://192.168.207.54:7002/Apimeasurement/measurement', {
+            fetch('http://dopplle.net/Apimeasurement/measurement?', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -346,19 +346,17 @@ export default class WaistPage extends React.Component {
                                 </View>
                                 <View style={{flexDirection:"row",marginTop:10}} >
                                     <View style={{alignSelf: 'flex-start'}}>
-                                        <TouchableHighlight onPress={this.handleFtInMinus}>
-                                            <Image 
-                                            style={{width:70,height:70}}
-                                            source={require('../Resources/minus.png')}
-                                            />
+                                        <TouchableHighlight onPress={this.handleFtInMinus} style={{borderRadius:35}}>
+                                            <Text style={{fontSize:35, color:'gray', fontWeight:'bold', textAlign:'center', backgroundColor:'lightgray', width:70, height:70, borderRadius:35, textAlignVertical:'center'}}>
+                                                -
+                                            </Text>
                                         </TouchableHighlight>
                                     </View>
                                     <View style={{marginLeft:15}}>
-                                        <TouchableHighlight onPress={this.handleFtInPlus}>
-                                            <Image 
-                                            style={{width:70,height:70}}
-                                            source={require('../Resources/plus.png')}
-                                            />
+                                        <TouchableHighlight onPress={this.handleFtInPlus} style={{borderRadius:35}} > 
+                                            <Text style={{fontSize:35, color:'gray', fontWeight:'bold', textAlign:'center',backgroundColor:'lightgray', width:70, height:70, borderRadius:35, textAlignVertical:'center'}}>
+                                                +
+                                            </Text>
                                         </TouchableHighlight>
                                     </View>
                                 </View>
@@ -373,19 +371,17 @@ export default class WaistPage extends React.Component {
                                 </View>
                                 <View style={{flexDirection:"row",marginTop:10}} >
                                     <View style={{alignSelf: 'flex-start'}}>
-                                        <TouchableHighlight onPress={this.handleCmMinus}>
-                                            <Image 
-                                            style={{width:70,height:70}}
-                                            source={require('../Resources/minus.png')}
-                                            />
+                                        <TouchableHighlight onPress={this.handleCmMinus} style={{borderRadius:35}}>
+                                            <Text style={{fontSize:35, color:'gray', fontWeight:'bold', textAlign:'center', backgroundColor:'lightgray', width:70, height:70, borderRadius:35, textAlignVertical:'center'}}>
+                                                -
+                                            </Text>
                                         </TouchableHighlight>
                                     </View>
                                     <View style={{marginLeft:15}}>
-                                        <TouchableHighlight onPress={this.handleCmPlus}>
-                                            <Image 
-                                            style={{width:70,height:70}}
-                                            source={require('../Resources/plus.png')}
-                                            />
+                                        <TouchableHighlight onPress={this.handleCmPlus} style={{borderRadius:35}}>
+                                            <Text style={{fontSize:35, color:'gray', fontWeight:'bold', textAlign:'center',backgroundColor:'lightgray', width:70, height:70, borderRadius:35, textAlignVertical:'center'}}>
+                                                +
+                                            </Text>
                                         </TouchableHighlight>
                                     </View>
                                 </View>
@@ -399,19 +395,17 @@ export default class WaistPage extends React.Component {
                                 </View>
                                 <View style={{flexDirection:"row",marginTop:10}} >
                                     <View style={{alignSelf: 'flex-start'}}>
-                                        <TouchableHighlight onPress={this.handleInchMinus}>
-                                            <Image 
-                                            style={{width:70,height:70}}
-                                            source={require('../Resources/minus.png')}
-                                            />
+                                        <TouchableHighlight onPress={this.handleInchMinus} style={{borderRadius:35}}>
+                                            <Text style={{fontSize:35, color:'gray', fontWeight:'bold', textAlign:'center', backgroundColor:'lightgray', width:70, height:70, borderRadius:35, textAlignVertical:'center'}}>
+                                                -
+                                            </Text>
                                         </TouchableHighlight>
                                     </View>
                                     <View style={{marginLeft:15}}>
-                                        <TouchableHighlight onPress={this.handleInchPlus}>
-                                            <Image 
-                                            style={{width:70,height:70}}
-                                            source={require('../Resources/plus.png')}
-                                            />
+                                        <TouchableHighlight onPress={this.handleInchPlus} style={{borderRadius:35}}>
+                                            <Text style={{fontSize:35, color:'gray', fontWeight:'bold', textAlign:'center',backgroundColor:'lightgray', width:70, height:70, borderRadius:35, textAlignVertical:'center'}}>
+                                                +
+                                            </Text>
                                         </TouchableHighlight>
                                     </View>
                                 </View>
