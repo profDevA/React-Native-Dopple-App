@@ -7,9 +7,6 @@
  */
 
 import React, {Component} from 'react';
-// import { createStore, applyMiddleware } from 'redux';
-// import ReduxThunk from 'redux-thunk';
-// import { Provider } from 'react-redux';
 import {Platform, StyleSheet,  View} from 'react-native';
 import { Avatar, Badge,  withBadge } from 'react-native-elements'
 // import reducers from './redux/reducers/index';

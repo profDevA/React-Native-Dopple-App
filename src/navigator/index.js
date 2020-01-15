@@ -15,6 +15,7 @@ import HeightPage from '../screens/heightPage'
 import LegPage from '../screens/legPage'
 import ShowvideoPage from '../screens/showvideoPage'
 import WaistPage from '../screens/waistPage'
+import ArmPage from '../screens/armPage'
  
 const AppContain =   createStackNavigator({
     Home: { screen: HomePage ,navigationOptions: { header: null }},
@@ -27,6 +28,7 @@ const AppContain =   createStackNavigator({
     Group:{screen:GroupPage,navigationOptions: { header: null }},
     Height:{screen:HeightPage,navigationOptions: { header: null }},
     Leg:{screen:LegPage,navigationOptions: { header: null }},
+    Arm:{screen:ArmPage,navigationOptions: { header: null }},
     ShowVideo:{screen:ShowvideoPage,navigationOptions: { header: null }},
     Waist:{screen:WaistPage,navigationOptions: { header: null }},
     },

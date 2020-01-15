@@ -59,6 +59,12 @@ export default class MeasurementPage extends React.Component {
     this.props.navigation.push('Leg')
   }
 
+  handleArm=()=>{
+    console.log('this is arm button')
+
+    this.props.navigation.push('Arm')
+  }
+
   handleMeasure =(data)=> {
     if (data.comments==='Height') {
       this.handleHeight()
@@ -67,7 +73,7 @@ export default class MeasurementPage extends React.Component {
     } else if (data.comments === 'Inside Leg') {
       this.handleLeg()
     } else if (data.comments === 'Torso arm length') {
-      console.log('this is undefined function')
+      this.handleArm()
     }
   }
 
@@ -134,8 +140,8 @@ export default class MeasurementPage extends React.Component {
                                                   {translateY:-25} 
                                                 ],
                                                 position:'absolute',
-                                                top:'50%',
-                                                left:'10%',
+                                                top:'70%',
+                                                left:'58%',
                                             }
                         touchableStyle.top = data.icon_y_percent+'%'
                         touchableStyle.left = data.icon_x_percent+'%'

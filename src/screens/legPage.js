@@ -45,7 +45,7 @@ export default class LegPage extends React.Component {
     this.setState({userId:userId,loading:true})
 
         //    fetch('http://192.168.207.54:7002/Apimeasurement/measurement?measurementId= 3', {
-           fetch('http://dopplle.net/Apimeasurement/measurement?measurementId= 3', {
+           await fetch('http://dopplle.net/Apimeasurement/measurement?measurementId= 3', {
                 method: 'GET',
                 }).then((response) => response.json())
                 .then(async(responseJson) => {
@@ -56,7 +56,6 @@ export default class LegPage extends React.Component {
                     this.setState({SubHeading:responseJson[0].SubHeading})
                     this.setState({SubText:responseJson[0].SubText})
                     this.setState({Videopath:responseJson[0].Videopath})
-                    
     
                     var tempheight = parseInt(responseJson[0].DefaultValueMM)
                     var tempInch = Math.round(convert(tempheight).from('mm').to('in'))
@@ -76,7 +75,7 @@ export default class LegPage extends React.Component {
                     console.log("--------------",err)
                 })
                 // fetch('http://192.168.207.54:7002/Apimeasurement/measurement', {
-                    fetch('http://dopplle.net/Apimeasurement/measurement?', {
+                    await fetch('http://dopplle.net/Apimeasurement/measurement?', {
                     
                     method: 'POST',
                     headers: {
@@ -253,8 +252,8 @@ export default class LegPage extends React.Component {
            
                   .then((responseJson) => {
                    console.log(responseJson)
-                   this.setState({loading:false})
                    setTimeout(() => {
+                    this.setState({loading:false})
                     this.props.navigation.pop()
                     }, 1500);
                    
@@ -302,7 +301,7 @@ export default class LegPage extends React.Component {
                              <View style={{width:170,height:25,marginTop:80,backgroundColor:"#a3dc00",justifyContent:"center"}}>
                                  <Text 
                                      style={{width:170, color:"white",fontWeight:"bold",fontSize:14,fontSize:12,textAlign:"center"}}
-                                     onPress={()=>this.props.navigation.push('ShowVideo')}
+                                     onPress={()=>this.props.navigation.navigate('ShowVideo',{videoPath:this.state.Videopath})}
                                  >SHOW ME HOW TO MEASURE
                                  </Text>
                              </View>

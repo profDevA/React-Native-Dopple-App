@@ -39,104 +39,101 @@ export default class HeightPage extends React.Component {
 
   componentDidMount = async()=>{
     var userId = await AsyncStorage.getItem('userId')
-   
 
     // var userId = '34'
     this.setState({userId:userId,loading:true})
- 
 
-            // fetch('http://192.168.207.54:7002/Apimeasurement/measurement?measurementId= 1', {
-            fetch('http://dopplle.net/Apimeasurement/measurement?measurementId= 1', {
-                method: 'GET',
-                }).then((response) => response.json())
-                .then(async(responseJson) => {
-                    // console.log(responseJson[0],'responsejson0')    
-                    this.setState({Description:responseJson[0].Description})
-                    this.setState({Comments:responseJson[0].Comments})
-                    this.setState({FemaleGroupImageURFemaleMeasurementImageURL:responseJson[0].FemaleGroupImageURFemaleMeasurementImageURL})
-                    this.setState({SubHeading:responseJson[0].SubHeading})
-                    this.setState({SubText:responseJson[0].SubText})
-                    this.setState({Videopath:responseJson[0].Videopath})
-                    
+        // fetch('http://192.168.207.54:7002/Apimeasurement/measurement?measurementId= 1', {
+        await fetch('http://dopplle.net/Apimeasurement/measurement?measurementId= 1', {
+            method: 'GET',
+            }).then((response) => response.json())
+            .then(async(responseJson) => {
+                console.log(responseJson[0],'responsejson0')    
+                this.setState({Description:responseJson[0].Description})
+                this.setState({Comments:responseJson[0].Comments})
+                this.setState({FemaleGroupImageURFemaleMeasurementImageURL:responseJson[0].FemaleGroupImageURFemaleMeasurementImageURL})
+                this.setState({SubHeading:responseJson[0].SubHeading})
+                this.setState({SubText:responseJson[0].SubText})
+                this.setState({Videopath:responseJson[0].Videopath})
+                
 
-                    var tempheight = parseInt(responseJson[0].DefaultValueMM)
+                var tempheight = parseInt(responseJson[0].DefaultValueMM)
+                var tempInch = Math.round(convert(tempheight).from('mm').to('in'))
+                var quotient = Math.floor(tempInch/12);
+                var remainder = tempInch % 12;
+                await  this.setState({ft:quotient,inch:remainder})
+                await this.setState({cm:tempheight/10,indivdualInch:tempInch})
+                await this.setState({height:tempheight})
+
+                if(responseJson[0].UnitName) {
+                    console.log(this.state.defaultUnitState, 'default unit state')
+                    this.setState({defaultUnitState:responseJson[0].UnitName})
+                }
+            
+            })
+            .catch((err)=>{
+                console.log("--------------",err)
+            })
+
+        // fetch('http://192.168.207.54:7002/Apimeasurement/measurement', {
+            await fetch('http://dopplle.net/Apimeasurement/measurement?', {
+            
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body:'UserID'+'='+userId+'&'+ 'MeasurementID'+'='+ '1'+'&'+ 'type'+'='+ 'read'
+            }).then(async(response) => response.json())
+            .then(async(responseJson) => {
+                this.setState({loading:false})   
+                if(responseJson ===undefined || responseJson.length ===0)
+                {
+                    this.setState({checkedFirst:"yes"})
+                    if(this.state.defaultUnitState==='Feet Inches')
+                    {
+                        this.setState({ftstate:true})
+                    }
+                    if(this.state.defaultUnitState==='cm')
+                    {
+                        this.setState({cmstate:true})
+                    }
+                    if(this.state.defaultUnitState==='Inches')
+                    {
+                        this.setState({inchstate:true})
+                    }
+                }
+                else{
+                    await this.setState({checkedFirst:"no"})
+                    var tempheight = parseInt(responseJson[0].ValueMM)
                     var tempInch = Math.round(convert(tempheight).from('mm').to('in'))
                     var quotient = Math.floor(tempInch/12);
                     var remainder = tempInch % 12;
-                    await  this.setState({ft:quotient,inch:remainder})
+                    await this.setState({ft:quotient,inch:remainder})
                     await this.setState({cm:tempheight/10,indivdualInch:tempInch})
                     await this.setState({height:tempheight})
 
-                    if(responseJson[0].UnitName) {
-                        console.log(this.state.defaultUnitState, 'default unit state')
-                        this.setState({defaultUnitState:responseJson[0].UnitName})
+                    if(responseJson[0].MeasureUnitID==='3')
+                    {
+                        
+                        await this.setState({ftstate:true,cmstate:false,inchstate:false})
                     }
-                
-                })
-                .catch((err)=>{
-                    console.log("--------------",err)
-                })
-
-            // fetch('http://192.168.207.54:7002/Apimeasurement/measurement', {
-                fetch('http://dopplle.net/Apimeasurement/measurement?', {
-                
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body:'UserID'+'='+userId+'&'+ 'MeasurementID'+'='+ '1'+'&'+ 'type'+'='+ 'read'
-                }).then(async(response) => response.json())
-                
-                        .then(async(responseJson) => {
-                         this.setState({loading:false})   
-                        if(responseJson ===undefined || responseJson.length ===0)
-                        {
-                            this.setState({checkedFirst:"yes"})
-                            if(this.state.defaultUnitState==='Feet Inches')
-                            {
-                                this.setState({ftstate:true})
-                            }
-                            if(this.state.defaultUnitState==='cm')
-                            {
-                                this.setState({cmstate:true})
-                            }
-                            if(this.state.defaultUnitState==='Inches')
-                            {
-                                this.setState({inchstate:true})
-                            }
-                        }
-                        else{
-                            await this.setState({checkedFirst:"no"})
-                            var tempheight = parseInt(responseJson[0].ValueMM)
-                            var tempInch = Math.round(convert(tempheight).from('mm').to('in'))
-                            var quotient = Math.floor(tempInch/12);
-                            var remainder = tempInch % 12;
-                            await this.setState({ft:quotient,inch:remainder})
-                            await this.setState({cm:tempheight/10,indivdualInch:tempInch})
-                            await this.setState({height:tempheight})
-    
-                            if(responseJson[0].MeasureUnitID==='3')
-                            {
-                                
-                                await this.setState({ftstate:true,cmstate:false,inchstate:false})
-                            }
-                            if(responseJson[0].MeasureUnitID==='1')
-                            {
-                             
-                                await this.setState({cmstate:true,ftstate:false,inchstate:false})
-                            }
-                            if(responseJson[0].MeasureUnitID==="2")
-                            {
-                               
-                                await this.setState({inchstate:true,ftstate:false,cmstate:false})
-                            }
-                            // this.setState({loading:false})
-                            // setTimeout(() => {
-                            // this.props.navigation.pop()
-                            // }, 1500);
-                            
-                        } 
-                });    
+                    if(responseJson[0].MeasureUnitID==='1')
+                    {
+                        
+                        await this.setState({cmstate:true,ftstate:false,inchstate:false})
+                    }
+                    if(responseJson[0].MeasureUnitID==="2")
+                    {
+                        
+                        await this.setState({inchstate:true,ftstate:false,cmstate:false})
+                    }
+                    // this.setState({loading:false})
+                    // setTimeout(() => {
+                    // this.props.navigation.pop()
+                    // }, 1500);
+                    
+                } 
+            });    
   }
 
 
@@ -240,6 +237,7 @@ export default class HeightPage extends React.Component {
         this.setState({loading:true})
         
         const { userId,checkedFirst,height,ftstate,cmstate,inchstate } = this.state
+        console.log( 'userId:',userId, 'checkedFirst:',checkedFirst,  'height:',height,  'cmstate:', cmstate, 'ftstate:', ftstate,  'inchstate:',inchstate,'This is saved data')
 
         let measureUintId = 0
         if(ftstate===true)
@@ -267,8 +265,8 @@ export default class HeightPage extends React.Component {
            
                   .then((responseJson) => {
                    console.log(responseJson)
-                   this.setState({loading:false})
                    setTimeout(() => {
+                    this.setState({loading:false})
                     this.props.navigation.pop()
                     }, 1500);
                    
@@ -293,10 +291,10 @@ export default class HeightPage extends React.Component {
     }
 
   render() {
-   const {ftstate,cmstate,inchstate,inch,ft,indivdualInch,cm,loading ,Description,Comments,FemaleGroupImageURFemaleMeasurementImageURL,SubHeading,SubText} =  this.state
+   const {ftstate,cmstate,height, inchstate,inch,ft,indivdualInch,cm,loading ,Description,Comments,FemaleGroupImageURFemaleMeasurementImageURL,SubHeading,SubText} =  this.state
    
-   console.log(ft, cm, inch)
-   console.log(ftstate, 'ftstate', cmstate, 'cmstate', inchstate, 'inchstate')
+   console.log(ft, cm, inch, indivdualInch, height)
+//    console.log(ftstate, 'ftstate', cmstate, 'cmstate', inchstate, 'inchstate')
 
     return (
         <ScrollView>
@@ -324,8 +322,8 @@ export default class HeightPage extends React.Component {
                         <View style={{width:170,height:25,marginTop:80,backgroundColor:"#a3dc00",justifyContent:"center"}}>
                             <Text 
                                 style={{width:170, color:"white",fontWeight:"bold",fontSize:14,fontSize:12,textAlign:"center"}}
-                                onPress={()=>this.props.navigation.push('ShowVideo')}
-                            >SHOW ME HOW TO MEASURE
+                                onPress={()=>this.props.navigation.navigate('ShowVideo',{videoPath:this.state.Videopath})}
+                                >SHOW ME HOW TO MEASURE
                             </Text>
                         </View>
                         <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",height:50,width:160,backgroundColor:"#ebebeb",marginTop:10,borderRadius:25}}>

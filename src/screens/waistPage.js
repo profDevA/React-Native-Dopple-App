@@ -47,7 +47,7 @@ export default class WaistPage extends React.Component {
     this.setState({userId:userId,loading:true})
 
             // fetch('http://192.168.207.54:7002/Apimeasurement/measurement?measurementId=2', {
-            fetch('http://dopplle.net/Apimeasurement/measurement?measurementId= 2', {
+            await fetch('http://dopplle.net/Apimeasurement/measurement?measurementId= 2', {
                 method: 'GET',
                 }).then((response) => response.json())
                 .then(async(responseJson) => {
@@ -79,7 +79,7 @@ export default class WaistPage extends React.Component {
                     console.log("--------------",err)
                 }) 
                 // fetch('http://192.168.207.54:7002/Apimeasurement/measurement', {
-                fetch('http://dopplle.net/Apimeasurement/measurement?', {
+                await fetch('http://dopplle.net/Apimeasurement/measurement?', {
                 
                 method: 'POST',
                 headers: {
@@ -253,8 +253,8 @@ export default class WaistPage extends React.Component {
            
                   .then((responseJson) => {
                    console.log(responseJson)
-                   this.setState({loading:false})
                    setTimeout(() => {
+                    this.setState({loading:false})
                     this.props.navigation.pop()
                     }, 1500);
                    
@@ -267,9 +267,6 @@ export default class WaistPage extends React.Component {
                         cm:81,
                         waist:810,
                      })
-    }
-    componentDidMount(){
-
     }
 
   render() {
@@ -302,8 +299,8 @@ export default class WaistPage extends React.Component {
                         <View style={{width:170,height:25,marginTop:20,backgroundColor:"#a3dc00",justifyContent:"center"}}>
                             <Text 
                                 style={{width:170, color:"white",fontWeight:"bold",fontSize:14,fontSize:12,textAlign:"center"}}
-                                onPress={()=>this.props.navigation.push('ShowVideo')}
-                            >SHOW ME HOW TO MEASURE
+                                onPress={()=>this.props.navigation.navigate('ShowVideo',{videoPath:this.state.Videopath})}
+                                >SHOW ME HOW TO MEASURE
                             </Text>
                         </View>
                         <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",height:50,width:160,backgroundColor:"#ebebeb",marginTop:10,borderRadius:25}}>
